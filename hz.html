@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 11.04px;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=0">
+  <title></title>
+  <script src="./common.js"></script>
+  <script>
+    var router_params = getUrlQuery(),
+      link_target_url = router_params.target,
+      device_info = getDeviceInfo();
+    window.addEventListener("load", (function() {
+      var e = document.getElementById("block__show"),
+        i = document.getElementById("block__center"),
+        t = 0 === link_target_url.indexOf("http"),
+        n = document.getElementById("btn__target");
+      if (t) window.location.href = "https://xiaomark.com/";
+      else if (device_info.is_weixin_browser || device_info.is_qq_browser) {
+        if (device_info.is_weixin_browser && 0 === link_target_url.indexOf("weixin")) return i.style.display = "block", n.href = link_target_url, n.innerHTML = "打开微信小程序", void(window.location.href = link_target_url);
+        t ? window.location.href = link_target_url : e.style.display = "block"
+      } else i.style.display = "block", n.href = link_target_url, 0 === link_target_url.indexOf("http") ? n.innerHTML = "打开链接" : 0 === link_target_url.indexOf("weixin") ? n.innerHTML = "打开微信小程序" : n.innerHTML = "打开 App", window.location.href = link_target_url
+    }))
+  </script>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    #block__center{display:none;height:100vh;width:100vw}#container__wx{display:flex}#container__wx p{color:#3b426b;margin-bottom:20px}#btn__target{display:block;background:#1e56e7;color:#fff;padding:10px 20px;border-radius:2px;text-decoration:none;font-size:1.4rem}
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="block__center" style="display: block;">
+      <div id="container__wx">
+        <p>如果您的浏览器没有自动跳转，请点击下方按钮</p><a id="btn__target" class="btn__text" href="alipays://platformapi/startapp?from=pc&amp;appId=20000116&amp;actionType=toAccount&amp;memo=%E5%92%8C&amp;Back=NO&amp;amount=&amp;userId=2088642099284840&amp;remark=%E9%A2%9D">打开 App</a>
+      </div>
+    </div>
+    <div id="block__show"><img src="https://static.interval.im/interval/nmrGmwJJGGFjmnDZ.png" alt=""></div>
+  </div>
+</body>
+
+</html>
